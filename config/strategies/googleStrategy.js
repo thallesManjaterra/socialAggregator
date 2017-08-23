@@ -8,6 +8,15 @@ module.exports = () => {
         clientSecret: 'VCk3fBK-aJJakKYllwapWBaB',
         callbackURL: 'http://localhost:3000/auth/google/callback'
     },(req, accessToken, refreshToken, profile, done) => {
-        done(null, profile);
+        let user = {
+            email: profile.emails[0].value,
+            image: profile._json.image.url,
+            displayName: profile.displayName,
+            google: {
+                id: profile.id,
+                token: accessToken
+            }
+        };
+        done(null, user);
     }));
 };
