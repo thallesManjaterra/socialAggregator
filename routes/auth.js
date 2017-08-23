@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 
+//google
 router.route('/google/callback')
     .get(passport.authenticate('google', {
         successRedirect: '/users',
@@ -13,4 +14,14 @@ router.route('/google')
             'https://www.googleapis.com/auth/userinfo.email'
         ]
     }));
+
+//twiiter
+router.route('/twitter/callback')
+    .get(passport.authenticate('twitter', {
+        successRedirect: '/users',
+        failure: '/error'
+    }));
+
+router.route('/twitter')
+    .get(passport.authenticate('twitter'));
 module.exports = router;

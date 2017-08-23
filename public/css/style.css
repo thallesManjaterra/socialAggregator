@@ -41,3 +41,8 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+/*estilos da página*/
+li {
+	margin-top: 10px;
+}
