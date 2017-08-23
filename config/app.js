@@ -10,6 +10,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
+app.use(express.static('./node_modules/bootstrap/dist'));
+app.use('/css', express.static('./node_modules/bootstrap-social')); //Social Sign-In Buttons made in pure CSS based on Bootstrap and Font Awesome
+app.use(express.static('./node_modules/font-awesome'));
+app.use('/js', express.static('./node_modules/jquery/dist'));
 
 //rotas
 app.use('/', require('../routes/index'));
