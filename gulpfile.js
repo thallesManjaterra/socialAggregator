@@ -22,9 +22,9 @@ gulp.task('develop', () => {
         script: './server.js',
         tasks: ['style']
     })
-    .on('restart', () => console.log('Reiniciando...'))
+    .on('restart', () => console.log('Reiniciando'))
     .on('crash', () => {
-        console.log('A aplicação quebrou');
+        console.log('A aplicação quebrou\n');
         stream.emit('restart', 10);
-    })
+    });
 });
