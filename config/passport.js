@@ -18,4 +18,6 @@ module.exports = app => {
     require('./strategies/google')();
     require('./strategies/twitter')();
     require('./strategies/facebook')();
+    require('./strategies/gitHub')();
+    require('./strategies/linkedIn')();
 };

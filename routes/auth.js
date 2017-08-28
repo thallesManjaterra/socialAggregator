@@ -24,7 +24,7 @@ router.route('/twitter/callback')
 router.route('/twitter')
     .get(passport.authenticate('twitter'));
 
-//twiiter
+//facebook
 router.route('/facebook/callback')
     .get(passport.authenticate('facebook', {
         successRedirect: '/users',
@@ -32,5 +32,23 @@ router.route('/facebook/callback')
     }));
 router.route('/facebook')
     .get(passport.authenticate('facebook'));
+
+//github
+router.route('/github/callback')
+    .get(passport.authenticate('github', {
+        successRedirect: '/users',
+        failure: '/error'
+    }));
+router.route('/github')
+        .get(passport.authenticate('github'));
+
+//linkedin
+router.route('/linkedin/callback')
+    .get(passport.authenticate('linkedin', {
+        successRedirect: '/users',
+        failure: '/error'
+    }));
+router.route('/linkedin')
+    .get(passport.authenticate('linkedin'));
 
 module.exports = router;

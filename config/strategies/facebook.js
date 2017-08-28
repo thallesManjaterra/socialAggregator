@@ -8,7 +8,7 @@ module.exports = () => {
         callbackURL: 'http://localhost:3000/auth/facebook/callback',
         passReqToCallback: true,
         profileFields: ['id', 'emails', 'displayName', 'picture']
-    }, (req, accessToken, refreshToken, profile, done) => {
+    }, (accessToken, refreshToken, profile, done) => {
         let user = {
             displayName: profile.displayName,
             email: profile._json.email,
