@@ -9,15 +9,18 @@ module.exports = () => {
         passReqToCallback: true,
         profileFields: ['id', 'emails', 'displayName', 'picture']
     }, (accessToken, refreshToken, profile, done) => {
-        let user = {
-            displayName: profile.displayName,
-            email: profile._json.email,
-            image: profile._json.picture.data.url,
-            facebook: {
-                id: profile._json.id,
-                token: accessToken
-            }
-        }
-        done(null, user);
+        User.findOne({'facebook.id': profile.id}, (err, x) => {
+            if (x) return done(null, x);
+            let user = {
+                displayName: profile.displayName,
+                email: profile._json.email,
+                image: profile._json.picture.data.url,
+                facebook: {
+                    id: profile._json.id,
+                }
+            };
+            User.create(user);
+            done(null, user);
+        });
     }));
 };

@@ -1,5 +1,6 @@
 const passport = require('passport');
 const TwitterStrategy = require('passport-twitter').Strategy;
+const User = require('../../models/userModel');
 
 module.exports = () => {
     passport.use(new TwitterStrategy({
@@ -8,14 +9,18 @@ module.exports = () => {
         callbackURL: 'http://localhost:3000/auth/twitter/callback',
         passReqToCallback: true
     }, (req, accessToken, tokenSecret, profile, done) => {
-        let user = {
-            image: profile._json.profile_image_url,
-            displayName: profile.displayName,
-            twitter: {
-                id: profile.id,
-                token: accessToken
-            }
-        };
-        done(null, user);
+        User.findOne({'twitter.id': profile.id}, (err, x) => {
+            if (x) return done(null, x);
+            let user = {
+                image: profile._json.profile_image_url,
+                displayName: profile.displayName,
+                twitter: {
+                    id: profile.id
+                }
+            };
+            User.create(user);
+            return done(null, user);
+        });
+
     }));
 };
