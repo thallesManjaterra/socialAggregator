@@ -8,13 +8,12 @@ router.use('/', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    res.json(req.user);
-    // res.render('users', {
-    //     user: {
-    //         nome: req.user.displayName,
-    //         img: req.user.image
-    //     }
-    // });
+    res.render('users', {
+        user: {
+            nome: req.user.displayName,
+            img: req.user.image
+        }
+    });
 });
 
 module.exports = router;

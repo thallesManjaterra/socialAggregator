@@ -1,6 +1,12 @@
 const router = require('express').Router();
 const passport = require('passport');
 
+router.route('/logout')
+    .get((req, res) => {
+        req.logout();
+        res.redirect('/');
+    })
+
 //google
 router.route('/google/callback')
     .get(passport.authenticate('google', {

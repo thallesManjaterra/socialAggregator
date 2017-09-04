@@ -1,9 +1,12 @@
 <html>
     <% include partials/head %>
     <body>
-        <div class="container">
-            <img src=<%= user.img %> />
-            <%= user.nome %>
-        </div>
+        <div class="login">
+            <p>
+                 <img class="img-circle userImg" src=<%= user.img %> />
+                 <span class="userName"><%= user.nome %></span>
+                 <a class="btn btn-sm btn-primary" href="/auth/logout">Logout</a>
+                </p>
+            </div>
     </body>
 </html>
