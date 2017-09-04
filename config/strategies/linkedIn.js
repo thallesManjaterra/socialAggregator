@@ -1,8 +1,6 @@
-const passport = require('passport');
 const LinkedIn = require('passport-linkedin-oauth2').Strategy;
-const User = require('../../models/userModel');
 
-module.exports = () => {
+module.exports = (passport, User) => {
     passport.use( new LinkedIn({
         clientID: '78emglj3012krm',
         clientSecret: 'PrRwUaQKdQMMndqV',
@@ -19,7 +17,7 @@ module.exports = () => {
                 }
             };
             User.create(user);
-            done(null, user);
+            User.create(user, (err, x) => done(null, x));
         });
     }));
 };

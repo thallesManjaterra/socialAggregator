@@ -1,9 +1,5 @@
-const passport = require('passport');
-const User = require('../../models/userModel');
-
-module.exports = () => {
-    //utilizando google strategy
-    const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+module.exports = (passport, User) => {
     passport.use(new GoogleStrategy({
         clientID: '570275349633-j4ls7ejknb282vtqu3dse9g3le0m7pr7.apps.googleusercontent.com',
         clientSecret: 'VCk3fBK-aJJakKYllwapWBaB',
@@ -20,7 +16,7 @@ module.exports = () => {
                 }
             };
             User.create(user);
-            return done(null, user);
+            User.create(user, (err, x) => done(null, x));
         });
     }));
 };

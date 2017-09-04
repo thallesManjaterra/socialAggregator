@@ -1,8 +1,6 @@
-const passport = require('passport');
 const TwitterStrategy = require('passport-twitter').Strategy;
-const User = require('../../models/userModel');
 
-module.exports = () => {
+module.exports = (passport, User) => {
     passport.use(new TwitterStrategy({
         consumerKey: 'FD2r4Ibi3ir1t9L6jwoD5yj8T',
         consumerSecret: 'TkCIPQtBsnoFCLsa1XLByM8cMsbXhSjfblPVkaTdu6TmkQ4n2N',
@@ -18,9 +16,7 @@ module.exports = () => {
                     id: profile.id
                 }
             };
-            User.create(user);
-            return done(null, user);
+            User.create(user, (err, x) => done(null, x));
         });
-
     }));
 };

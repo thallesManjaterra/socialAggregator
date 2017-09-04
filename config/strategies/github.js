@@ -1,9 +1,6 @@
-const passport = require('passport');
-const User = require('../../models/userModel');
-
 const GitHubStrategy = require('passport-github').Strategy;
 
-module.exports = () => {
+module.exports = (passport, User) => {
     passport.use(new GitHubStrategy({
         clientID: 'e2c99297f0838dba86a1',
         clientSecret: 'ffed8a9fc742e86e87006cefbf18411461e1baf0',
@@ -21,7 +18,7 @@ module.exports = () => {
                 }
             };
             User.create(user);
-            return done(null, user);
+            User.create(user, (err, x) => done(null, x));
         });
     }));
 };

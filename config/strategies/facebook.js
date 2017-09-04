@@ -1,7 +1,7 @@
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-module.exports = User => {
+module.exports = (passport, User) => {
     passport.use(new FacebookStrategy({
         clientID: '1406530956062012',
         clientSecret: '4ddf0385e45618db6863b4ce2d1b2dfb',
@@ -20,7 +20,7 @@ module.exports = User => {
                 }
             };
             User.create(user);
-            done(null, user);
+            User.create(user, (err, x) => done(null, x));
         });
     }));
 };

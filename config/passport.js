@@ -1,4 +1,5 @@
 const passport = require('passport');
+const User = require('../models/userModel');
 
 module.exports = app => {
 
@@ -7,17 +8,17 @@ module.exports = app => {
     app.use(passport.session());
 
     passport.serializeUser((user, done) => {
-        done(null, user);
+        done(null, user._id);
     });
 
-    passport.deserializeUser((user, done) => {
-        done(null, user);
+    passport.deserializeUser((id, done) => {
+        User.findById(id, (err, x) => done(null, x));
     });
 
     //strategies
-    require('./strategies/google')();
-    require('./strategies/twitter')();
-    require('./strategies/facebook')();
-    require('./strategies/github')();
-    require('./strategies/linkedIn')();
+    require('./strategies/google')(passport, User);
+    require('./strategies/twitter')(passport, User);
+    require('./strategies/facebook')(passport, User);
+    require('./strategies/github')(passport, User);
+    require('./strategies/linkedIn')(passport, User);
 };
